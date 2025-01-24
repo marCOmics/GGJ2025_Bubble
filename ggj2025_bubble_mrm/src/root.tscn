@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://vg4ysocm2e6b"]
+
+[ext_resource type="PackedScene" uid="uid://dltagou3gheta" path="res://src/bubble.tscn" id="1_7228i"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Bubble" parent="." instance=ExtResource("1_7228i")]
+position = Vector2(520, 528)
