@@ -1,8 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://vg4ysocm2e6b"]
+[gd_scene load_steps=5 format=3 uid="uid://vg4ysocm2e6b"]
 
 [ext_resource type="PackedScene" uid="uid://dltagou3gheta" path="res://src/bubble.tscn" id="1_7228i"]
+[ext_resource type="Texture2D" uid="uid://do0ahv27t2cw0" path="res://res/Background.png" id="2_3brtk"]
+[ext_resource type="Texture2D" uid="uid://bibqqg54l7sut" path="res://res/Sink.png" id="2_doqv5"]
+[ext_resource type="Texture2D" uid="uid://c7y5vwgcm5hdb" path="res://res/WaterTap.png" id="4_xdhea"]
 
 [node name="Root" type="Node2D"]
 
-[node name="Bubble" parent="." instance=ExtResource("1_7228i")]
-position = Vector2(520, 528)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(540, 960)
+transform = Transform2D(1, 0, 0, 1, 540, 960)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_3brtk")
+
+[node name="Sink" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_doqv5")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Bubble" parent="ParallaxBackground/ParallaxLayer2" instance=ExtResource("1_7228i")]
+position = Vector2(181, -182)
+
+[node name="WaterTap" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(0, -664)
+texture = ExtResource("4_xdhea")
