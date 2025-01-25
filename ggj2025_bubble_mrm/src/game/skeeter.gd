@@ -1,6 +1,8 @@
 extends Sprite2D
 class_name GGJ_Skeeter
 
+@onready var _spikyToothbrush = $SpikyToothbrush
+
 var _degree : float = 0.0
 var _lastTickDegree : float = _degree
 var _game : GGJ_Game
@@ -16,7 +18,7 @@ func init(p_game: GGJ_Game, p_gyroscope : GGJ_Gyroscope) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimationPlayer.play("Default")
-	$SpikyToothbrush.hide()
+	_spikyToothbrush.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -69,22 +71,22 @@ func calc_new_degree():
 		_degree = newDegree
 
 
-func _input(event):
-	# Mouse in viewport coordinates.
-	pass
-	#if (event is InputEventScreenTouch):
-		#if event.pressed:
-			##print("Offset: " + str(offset.x)) #event.position)
-			#m_degree += 1
+func hasToothbrushArmor() -> bool:
+	return _spikyToothbrush.visible
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.get_parent() is GGJ_Bubble:
 		var bubble = body.get_parent() as GGJ_Bubble
-		bubble.caputure_skeeter()
-		hide()
+		if hasToothbrushArmor():
+			bubble.pop()
+			_spikyToothbrush.hide() #remove protection
+		else:
+			#print("Body: " + str(body.get_parent()))
+			bubble.caputure_skeeter()
+			hide()
 	elif body.get_parent() is GGJ_Upgrade:
 		var upgrade = body.get_parent() as GGJ_Upgrade
 		upgrade.get_parent().remove_child(upgrade)
 		upgrade.hide()
-		$SpikyToothbrush.show()
+		_spikyToothbrush.show()

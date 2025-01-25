@@ -21,7 +21,7 @@ func _on_start_button_input_event(viewport: Node, event: InputEvent, shape_idx: 
 
 func _on_comic_btn_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		print("Comic Button clicked") #TODO
+		get_tree().change_scene_to_file("res://src/comic.tscn")
 
 
 func _on_settings_btn_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

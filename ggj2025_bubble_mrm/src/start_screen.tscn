@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://i1wvtervecl5"]
+[gd_scene load_steps=14 format=3 uid="uid://i1wvtervecl5"]
 
 [ext_resource type="Texture2D" uid="uid://dkclipu6srr0x" path="res://res/Background_StartScreen.png" id="1_irdiq"]
 [ext_resource type="Script" path="res://src/start_screen.gd" id="1_rhj35"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dres88bkisfg1" path="res://res/MenuButtons_Trio.png" id="3_wx1eo"]
 [ext_resource type="Texture2D" uid="uid://o4d2gs7ad1qm" path="res://res/MenuButtons_Solo.png" id="4_kcvul"]
 [ext_resource type="FontFile" uid="uid://ciljxpg61awtb" path="res://res/exo-font/ExoMedium-5mMV.otf" id="5_cg766"]
+[ext_resource type="Texture2D" uid="uid://cocgh6plvfg3e" path="res://res/Title.png" id="7_gord4"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mos7r"]
 particle_flag_disable_z = true
@@ -47,9 +48,9 @@ randomness = 0.8
 
 [node name="TrioButtonTexture" type="TextureRect" parent="."]
 offset_left = 14.0
-offset_top = 594.0
+offset_top = 673.0
 offset_right = 1038.0
-offset_bottom = 1618.0
+offset_bottom = 1697.0
 texture = ExtResource("3_wx1eo")
 
 [node name="StartBtn" type="Area2D" parent="TrioButtonTexture"]
@@ -107,9 +108,9 @@ shape = SubResource("CircleShape2D_nhlxg")
 
 [node name="QuitButtonTexture" type="TextureRect" parent="."]
 offset_left = 735.0
-offset_top = 1657.0
+offset_top = 1696.0
 offset_right = 991.0
-offset_bottom = 1913.0
+offset_bottom = 1952.0
 texture = ExtResource("4_kcvul")
 
 [node name="Area2D" type="Area2D" parent="QuitButtonTexture"]
@@ -142,13 +143,10 @@ Developer: marCOmics
 @Global Game Jam 2025
 [/font_size]"
 
-[node name="Title_Temp" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(1080, 300)
-offset_top = 200.0
+[node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1080.0
-offset_bottom = 500.0
-bbcode_enabled = true
-text = "[center][font_size=160]TODO: Title[/font_size][/center]"
+offset_bottom = 720.0
+texture = ExtResource("7_gord4")
 
 [connection signal="gui_input" from="TrioButtonTexture" to="." method="_on_trio_button_texture_gui_input"]
 [connection signal="input_event" from="TrioButtonTexture/StartBtn" to="." method="_on_start_button_input_event"]

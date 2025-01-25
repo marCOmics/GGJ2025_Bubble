@@ -36,9 +36,9 @@ randomness = 0.8
 
 [node name="BackButtonTexture" type="TextureRect" parent="."]
 offset_left = 735.0
-offset_top = 1657.0
+offset_top = 1696.0
 offset_right = 991.0
-offset_bottom = 1913.0
+offset_bottom = 1952.0
 texture = ExtResource("5_c0ef2")
 
 [node name="Area2D" type="Area2D" parent="BackButtonTexture"]

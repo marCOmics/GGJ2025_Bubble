@@ -47,15 +47,23 @@ func calc_pos(p_radius: float, p_degree : float = _degree) -> Vector2:
 func despawn(p_bubbleList : Node2D) -> void:
 	if !$AnimationPlayer.is_playing():
 		$CharacterBody2D/CollisionShape2D.disabled = true #instantly remove collision
-		_speed = 2.0 #Stop moving
+		_speed = 2.0
 		$AnimationPlayer.play("Despawn")
 		await $AnimationPlayer.animation_finished
 		if $SkeeterClone.visible: #GameOver Condition
 			GGJ_Game.get_instance().end_game()
-		hide()
 		p_bubbleList.remove_child(self)
 		queue_free()
 
+
+func pop() -> void:
+	_speed = 0.0 #Stop moving
+	$CharacterBody2D/CollisionShape2D.disabled = true #instantly remove collision
+	$AnimationPlayer.play("Pop")
+	await $AnimationPlayer.animation_finished
+	get_parent().remove_child(self)
+	hide()
+	queue_free()
 
 #func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	#match "anim_name":
