@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vg4ysocm2e6b"]
+[gd_scene load_steps=12 format=3 uid="uid://vg4ysocm2e6b"]
 
 [ext_resource type="Script" path="res://src/game/game.gd" id="1_lkrp0"]
 [ext_resource type="PackedScene" uid="uid://dkajoq0ekgo1v" path="res://src/game/gyroscope.tscn" id="2_mh5cp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c7y5vwgcm5hdb" path="res://res/WaterTap.png" id="6_pemya"]
 [ext_resource type="Texture2D" uid="uid://o4d2gs7ad1qm" path="res://res/MenuButtons_Solo.png" id="7_r47c0"]
 [ext_resource type="Texture2D" uid="uid://bgn54sh0qdxgo" path="res://res/MenuButton_Solo_Big.png" id="8_gmn3f"]
+[ext_resource type="PackedScene" uid="uid://4bxgh2couqhq" path="res://src/game/act_mngr.tscn" id="9_ci3v4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0k5qo"]
 
@@ -49,29 +50,6 @@ shape = SubResource("CircleShape2D_0k5qo")
 [node name="WaterTap" type="Sprite2D" parent="ParallaxBackground/ParallaxUp"]
 position = Vector2(0, -700)
 texture = ExtResource("6_pemya")
-
-[node name="ACTPanel" type="Panel" parent="ParallaxBackground/ParallaxUp"]
-custom_minimum_size = Vector2(1000, 300)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -500.0
-offset_top = 620.0
-offset_right = 500.0
-offset_bottom = 920.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ParallaxBackground/ParallaxUp/ACTPanel"]
-visible = false
-custom_minimum_size = Vector2(1000, 300)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-bbcode_enabled = true
-text = "test"
 
 [node name="PauseBtn" type="TextureRect" parent="ParallaxBackground/ParallaxUp"]
 anchors_preset = 8
@@ -176,6 +154,9 @@ text = "[center][font_size=80]Quit[/font_size][/center]"
 position = Vector2(124, 130)
 scale = Vector2(10, 10)
 shape = SubResource("CircleShape2D_0tje8")
+
+[node name="ACTMngr" parent="." instance=ExtResource("9_ci3v4")]
+position = Vector2(0, 100)
 
 [connection signal="body_entered" from="ParallaxBackground/ParallaxDown/Sink/Hole" to="." method="_on_hole_body_entered"]
 [connection signal="input_event" from="ParallaxBackground/ParallaxUp/PauseBtn/PauseArea" to="." method="_on_pause_area_input_event"]

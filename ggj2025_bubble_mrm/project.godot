@@ -22,6 +22,8 @@ config/icon="res://icon.svg"
 window/size/viewport_width=540
 window/size/viewport_height=1000
 window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/stretch/scale=0.5
 window/handheld/orientation=1
 

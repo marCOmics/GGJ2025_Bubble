@@ -8,6 +8,7 @@ var bubbleSCN = preload("res://src/game/bubble.tscn")
 @onready var _bubbleList := $ParallaxBackground/ParallaxDown/Bubbles
 @onready var _pauseOrGameoverLabel = $ParallaxBackground/PauseOrGameOverTint/CanvasLayer/PauseOrGameOverLabel
 
+
 static var RNG = RandomNumberGenerator.new()
 static var _instance : GGJ_Game #Singleton Pattern
 var _timeTillNextBubbleSpawn : float =  1
@@ -24,10 +25,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	spawn_bubbles(delta)
 	
-	#Update richtext label
-	_label.text = "[font_size=70]x: " + str(_gyroscope.get_rotation().normalized().x) + "\n" + \
-		"y: " + str(_gyroscope.get_rotation().normalized().y) #+ "\n" + \
-		#"z: " + str(_gyroscope.get_rotation().z) + "[/font_size]"
+	##Update richtext label
+	#_label.text = "[font_size=70]x: " + str(_gyroscope.get_rotation().normalized().x) + "\n" + \
+		#"y: " + str(_gyroscope.get_rotation().normalized().y) #+ "\n" + \
+		##"z: " + str(_gyroscope.get_rotation().z) + "[/font_size]"
 
 
 static func on_pc() -> bool:
@@ -46,7 +47,7 @@ static func get_instance() -> GGJ_Game:
 
 func end_game() -> void:
 	toggle_pause()
-	_pauseOrGameoverLabel.text = "[center][font_size=200]_GAME OVER[/font_size][/center]" 
+	_pauseOrGameoverLabel.text = "[center][font_size=200]GAME OVER[/font_size][/center]" 
 	$ParallaxBackground/PauseOrGameOverTint/CanvasLayer/ContinueBtn.hide()
 
 
@@ -55,7 +56,6 @@ func spawn_bubbles(p_delta: float) -> void:
 	const MAX_TIME_TO_SPAWN = 3.0
 	
 	_timeTillNextBubbleSpawn -= p_delta 
-	#print("Time till spawn: " + str(_timeTillNextBubbleSpawn))
 	
 	if _timeTillNextBubbleSpawn <= 0:
 		var newBubble := bubbleSCN.instantiate()
@@ -87,7 +87,7 @@ func toggle_pause() -> bool:
 	$ParallaxBackground/PauseOrGameOverTint.visible = currently_paused
 	$ParallaxBackground/PauseOrGameOverTint/CanvasLayer.visible = currently_paused
 	#"underscore" Prefix, as CanvasLayer is swallowing the first symbol:
-	_pauseOrGameoverLabel.text = "[center][font_size=200]_PAUSED[/font_size][/center]" 
+	_pauseOrGameoverLabel.text = "[center][font_size=200]PAUSED[/font_size][/center]" 
 	get_tree().paused = currently_paused
 	return currently_paused
 
