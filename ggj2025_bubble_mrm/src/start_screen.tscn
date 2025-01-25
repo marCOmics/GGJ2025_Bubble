@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://i1wvtervecl5"]
+[gd_scene load_steps=13 format=3 uid="uid://i1wvtervecl5"]
 
 [ext_resource type="Texture2D" uid="uid://dkclipu6srr0x" path="res://res/Background_StartScreen.png" id="1_irdiq"]
 [ext_resource type="Script" path="res://src/start_screen.gd" id="1_rhj35"]
@@ -22,6 +22,8 @@ gravity = Vector3(0, 0, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_g5f1x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhlxg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_udhef"]
 
 [sub_resource type="Theme" id="Theme_dnr8a"]
 default_font = ExtResource("5_cg766")
@@ -85,9 +87,9 @@ position = Vector2(823, 500)
 scale = Vector2(15, 15)
 shape = SubResource("CircleShape2D_g5f1x")
 
-[node name="OptionsBtn" type="Area2D" parent="TrioButtonTexture"]
+[node name="SettingsBtn" type="Area2D" parent="TrioButtonTexture"]
 
-[node name="OptionsLabel" type="RichTextLabel" parent="TrioButtonTexture/OptionsBtn"]
+[node name="SettingsLabel" type="RichTextLabel" parent="TrioButtonTexture/SettingsBtn"]
 process_mode = 4
 custom_minimum_size = Vector2(400, 150)
 offset_left = 264.0
@@ -95,9 +97,10 @@ offset_top = 696.0
 offset_right = 664.0
 offset_bottom = 846.0
 bbcode_enabled = true
-text = "[center][font_size=110]Options[/font_size][/center]"
+text = "[center][font_size=100]Settings
+(score?)[/font_size][/center]"
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="TrioButtonTexture/OptionsBtn"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TrioButtonTexture/SettingsBtn"]
 position = Vector2(467, 741)
 scale = Vector2(19, 19)
 shape = SubResource("CircleShape2D_nhlxg")
@@ -109,15 +112,22 @@ offset_right = 991.0
 offset_bottom = 1913.0
 texture = ExtResource("4_kcvul")
 
-[node name="QuitButtonLabel" type="RichTextLabel" parent="QuitButtonTexture"]
+[node name="Area2D" type="Area2D" parent="QuitButtonTexture"]
+
+[node name="QuitButtonLabel" type="RichTextLabel" parent="QuitButtonTexture/Area2D"]
+process_mode = 4
 custom_minimum_size = Vector2(200, 100)
-layout_mode = 0
 offset_left = 28.0
 offset_top = 105.0
 offset_right = 228.0
 offset_bottom = 205.0
 bbcode_enabled = true
 text = "[center][font_size=80]Quit[/font_size][/center]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuitButtonTexture/Area2D"]
+position = Vector2(124, 130)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_udhef")
 
 [node name="CreditsLabel" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(700, 200)
@@ -143,4 +153,5 @@ text = "[center][font_size=160]TODO: Title[/font_size][/center]"
 [connection signal="gui_input" from="TrioButtonTexture" to="." method="_on_trio_button_texture_gui_input"]
 [connection signal="input_event" from="TrioButtonTexture/StartBtn" to="." method="_on_start_button_input_event"]
 [connection signal="input_event" from="TrioButtonTexture/ComicBtn" to="." method="_on_comic_btn_input_event"]
-[connection signal="input_event" from="TrioButtonTexture/OptionsBtn" to="." method="_on_options_btn_input_event"]
+[connection signal="input_event" from="TrioButtonTexture/SettingsBtn" to="." method="_on_settings_btn_input_event"]
+[connection signal="input_event" from="QuitButtonTexture/Area2D" to="." method="_on_area_2d_input_event"]

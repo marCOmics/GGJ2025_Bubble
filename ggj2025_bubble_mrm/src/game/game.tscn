@@ -1,0 +1,183 @@
+[gd_scene load_steps=11 format=3 uid="uid://vg4ysocm2e6b"]
+
+[ext_resource type="Script" path="res://src/game/game.gd" id="1_lkrp0"]
+[ext_resource type="PackedScene" uid="uid://dkajoq0ekgo1v" path="res://src/game/gyroscope.tscn" id="2_mh5cp"]
+[ext_resource type="Texture2D" uid="uid://do0ahv27t2cw0" path="res://res/Background.png" id="3_5xwv3"]
+[ext_resource type="Texture2D" uid="uid://bibqqg54l7sut" path="res://res/Sink.png" id="4_xdcal"]
+[ext_resource type="PackedScene" uid="uid://b4egxis0vcv8j" path="res://src/game/skeeter.tscn" id="5_yeumy"]
+[ext_resource type="Texture2D" uid="uid://c7y5vwgcm5hdb" path="res://res/WaterTap.png" id="6_pemya"]
+[ext_resource type="Texture2D" uid="uid://o4d2gs7ad1qm" path="res://res/MenuButtons_Solo.png" id="7_r47c0"]
+[ext_resource type="Texture2D" uid="uid://bgn54sh0qdxgo" path="res://res/MenuButton_Solo_Big.png" id="8_gmn3f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0k5qo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0tje8"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(0, -100)
+script = ExtResource("1_lkrp0")
+
+[node name="Gyroscope" parent="." instance=ExtResource("2_mh5cp")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(540, 1000)
+transform = Transform2D(1, 0, 0, 1, 540, 1000)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground"]
+visible = false
+
+[node name="ParallaxDown" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxDown"]
+texture = ExtResource("3_5xwv3")
+
+[node name="Sink" type="Sprite2D" parent="ParallaxBackground/ParallaxDown"]
+texture = ExtResource("4_xdcal")
+
+[node name="Hole" type="Area2D" parent="ParallaxBackground/ParallaxDown/Sink"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/ParallaxDown/Sink/Hole"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_0k5qo")
+
+[node name="Skeeter" parent="ParallaxBackground/ParallaxDown" instance=ExtResource("5_yeumy")]
+
+[node name="Bubbles" type="Node2D" parent="ParallaxBackground/ParallaxDown"]
+
+[node name="ParallaxUp" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="WaterTap" type="Sprite2D" parent="ParallaxBackground/ParallaxUp"]
+position = Vector2(0, -700)
+texture = ExtResource("6_pemya")
+
+[node name="ACTPanel" type="Panel" parent="ParallaxBackground/ParallaxUp"]
+custom_minimum_size = Vector2(1000, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = 620.0
+offset_right = 500.0
+offset_bottom = 920.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ParallaxBackground/ParallaxUp/ACTPanel"]
+visible = false
+custom_minimum_size = Vector2(1000, 300)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "test"
+
+[node name="PauseBtn" type="TextureRect" parent="ParallaxBackground/ParallaxUp"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 260.0
+offset_top = -940.0
+offset_right = 516.0
+offset_bottom = -684.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_r47c0")
+
+[node name="PauseArea" type="Area2D" parent="ParallaxBackground/ParallaxUp/PauseBtn"]
+
+[node name="PauseButtonLabel" type="RichTextLabel" parent="ParallaxBackground/ParallaxUp/PauseBtn/PauseArea"]
+process_mode = 4
+custom_minimum_size = Vector2(200, 100)
+offset_left = 28.0
+offset_top = 105.0
+offset_right = 228.0
+offset_bottom = 205.0
+bbcode_enabled = true
+text = "[center][font_size=75]Pause[/font_size][/center]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/ParallaxUp/PauseBtn/PauseArea"]
+position = Vector2(124, 130)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_0tje8")
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxUp"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseOrGameOverTint" type="CanvasModulate" parent="ParallaxBackground"]
+visible = false
+position = Vector2(0, -100)
+color = Color(0.270222, 0.270222, 0.270222, 0.921569)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ParallaxBackground/PauseOrGameOverTint"]
+visible = false
+offset = Vector2(520, 960)
+transform = Transform2D(1, 0, 0, 1, 520, 960)
+
+[node name="PauseOrGameOverLabel" type="RichTextLabel" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer"]
+custom_minimum_size = Vector2(1040, 300)
+offset_left = -500.0
+offset_top = -400.0
+offset_right = 540.0
+offset_bottom = -100.0
+bbcode_enabled = true
+text = "[center][font_size=200]PPAUSE[/font_size][/center]"
+
+[node name="ContinueBtn" type="TextureRect" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer"]
+process_mode = 2
+offset_left = -222.0
+offset_top = -239.0
+offset_right = 290.0
+offset_bottom = 273.0
+texture = ExtResource("8_gmn3f")
+
+[node name="ContinueArea" type="Area2D" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/ContinueBtn"]
+
+[node name="ContinueBtnLabel" type="RichTextLabel" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/ContinueBtn/ContinueArea"]
+process_mode = 4
+custom_minimum_size = Vector2(300, 100)
+offset_left = 106.0
+offset_top = 236.0
+offset_right = 406.0
+offset_bottom = 336.0
+bbcode_enabled = true
+text = "[center][font_size=75]Continue[/font_size][/center]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/ContinueBtn/ContinueArea"]
+position = Vector2(257, 260)
+scale = Vector2(15, 15)
+shape = SubResource("CircleShape2D_0tje8")
+
+[node name="QuitButtonTexture" type="TextureRect" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer"]
+process_mode = 2
+offset_left = -97.0
+offset_top = 238.0
+offset_right = 159.0
+offset_bottom = 494.0
+texture = ExtResource("7_r47c0")
+
+[node name="QuitArea" type="Area2D" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/QuitButtonTexture"]
+
+[node name="QuitButtonLabel" type="RichTextLabel" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/QuitButtonTexture/QuitArea"]
+process_mode = 4
+custom_minimum_size = Vector2(200, 100)
+offset_left = 28.0
+offset_top = 105.0
+offset_right = 228.0
+offset_bottom = 205.0
+bbcode_enabled = true
+text = "[center][font_size=80]Quit[/font_size][/center]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/QuitButtonTexture/QuitArea"]
+position = Vector2(124, 130)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_0tje8")
+
+[connection signal="body_entered" from="ParallaxBackground/ParallaxDown/Sink/Hole" to="." method="_on_hole_body_entered"]
+[connection signal="input_event" from="ParallaxBackground/ParallaxUp/PauseBtn/PauseArea" to="." method="_on_pause_area_input_event"]
+[connection signal="input_event" from="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/ContinueBtn/ContinueArea" to="." method="_on_continue_area_input_event"]
+[connection signal="input_event" from="ParallaxBackground/PauseOrGameOverTint/CanvasLayer/QuitButtonTexture/QuitArea" to="." method="_on_quit_area_input_event"]

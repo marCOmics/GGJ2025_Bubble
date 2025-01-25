@@ -3,7 +3,10 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	#Rescale window on mobile:
+	if !GGJ_Game.on_pc():
+		get_window().size = Vector2i(1080, 2000)
+		get_window().content_scale_factor = 1.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -13,7 +16,7 @@ func _process(delta: float) -> void:
 
 func _on_start_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		get_tree().change_scene_to_file("res://src/game.tscn")
+		get_tree().change_scene_to_file("res://src/game/game.tscn")
 
 
 func _on_comic_btn_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
@@ -21,6 +24,11 @@ func _on_comic_btn_input_event(viewport: Node, event: InputEvent, shape_idx: int
 		print("Comic Button clicked") #TODO
 
 
-func _on_options_btn_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_settings_btn_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		print("Options Button clicked") #TODO
+		get_tree().change_scene_to_file("res://src/settings.tscn")
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		get_tree().quit()

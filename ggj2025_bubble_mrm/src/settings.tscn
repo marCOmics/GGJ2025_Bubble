@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://eiix2py215rm"]
+
+[ext_resource type="Script" path="res://src/settings.gd" id="1_lvw1m"]
+[ext_resource type="Texture2D" uid="uid://dkclipu6srr0x" path="res://res/Background_StartScreen.png" id="2_hhnld"]
+[ext_resource type="Texture2D" uid="uid://c34wsipdpmmww" path="res://res/Bubble.png" id="3_kqrel"]
+[ext_resource type="Texture2D" uid="uid://o4d2gs7ad1qm" path="res://res/MenuButtons_Solo.png" id="5_c0ef2"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mos7r"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 1.0
+initial_velocity_min = 220.43
+initial_velocity_max = 360.21
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_udhef"]
+
+[node name="SettingScreen" type="Node2D"]
+script = ExtResource("1_lvw1m")
+
+[node name="BG" type="TextureRect" parent="."]
+offset_right = 1080.0
+offset_bottom = 2000.0
+texture = ExtResource("2_hhnld")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BG"]
+modulate = Color(1, 1, 1, 0.596078)
+position = Vector2(542, 2083)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_mos7r")
+texture = ExtResource("3_kqrel")
+lifetime = 7.0
+randomness = 0.8
+
+[node name="BackButtonTexture" type="TextureRect" parent="."]
+offset_left = 735.0
+offset_top = 1657.0
+offset_right = 991.0
+offset_bottom = 1913.0
+texture = ExtResource("5_c0ef2")
+
+[node name="Area2D" type="Area2D" parent="BackButtonTexture"]
+
+[node name="BackButtonLabel" type="RichTextLabel" parent="BackButtonTexture/Area2D"]
+process_mode = 4
+custom_minimum_size = Vector2(200, 100)
+offset_left = 28.0
+offset_top = 105.0
+offset_right = 228.0
+offset_bottom = 205.0
+bbcode_enabled = true
+text = "[center][font_size=80]Back[/font_size][/center]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackButtonTexture/Area2D"]
+position = Vector2(124, 130)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_udhef")
+
+[node name="SettingsLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(1080, 300)
+offset_top = 200.0
+offset_right = 1080.0
+offset_bottom = 500.0
+bbcode_enabled = true
+text = "[center][font_size=160]Settings[/font_size][/center]"
+
+[connection signal="input_event" from="BackButtonTexture/Area2D" to="." method="_on_area_2d_input_event"]
