@@ -1,5 +1,5 @@
 extends Sprite2D
-
+class_name GGJ_Skeeter
 
 var _degree : float = 0.0
 var _lastTickDegree : float = _degree

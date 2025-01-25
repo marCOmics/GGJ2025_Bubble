@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://vg4ysocm2e6b"]
+[gd_scene load_steps=8 format=3 uid="uid://vg4ysocm2e6b"]
 
-[ext_resource type="PackedScene" uid="uid://dltagou3gheta" path="res://src/bubble.tscn" id="1_7228i"]
 [ext_resource type="Script" path="res://src/game.gd" id="1_mdjyi"]
 [ext_resource type="Texture2D" uid="uid://do0ahv27t2cw0" path="res://res/Background.png" id="2_3brtk"]
 [ext_resource type="Texture2D" uid="uid://bibqqg54l7sut" path="res://res/Sink.png" id="2_doqv5"]
@@ -31,9 +30,9 @@ texture = ExtResource("2_3brtk")
 [node name="Sink" type="Sprite2D" parent="ParallaxBackground/ParallaxDown"]
 texture = ExtResource("2_doqv5")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="ParallaxBackground/ParallaxDown/Sink"]
+[node name="Hole" type="Area2D" parent="ParallaxBackground/ParallaxDown/Sink"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/ParallaxDown/Sink/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/ParallaxDown/Sink/Hole"]
 scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_0k5qo")
 
@@ -41,8 +40,7 @@ shape = SubResource("CircleShape2D_0k5qo")
 
 [node name="Bubbles" type="Node2D" parent="ParallaxBackground/ParallaxDown"]
 
-[node name="Bubble" parent="ParallaxBackground/ParallaxDown/Bubbles" instance=ExtResource("1_7228i")]
-visible = false
+[node name="Bubble" parent="ParallaxBackground/ParallaxDown/Bubbles" instance_placeholder="res://src/bubble.tscn"]
 position = Vector2(2, -336)
 
 [node name="ParallaxUp" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -72,3 +70,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 bbcode_enabled = true
 text = "test"
+
+[connection signal="body_entered" from="ParallaxBackground/ParallaxDown/Sink/Hole" to="." method="_on_hole_body_entered"]
