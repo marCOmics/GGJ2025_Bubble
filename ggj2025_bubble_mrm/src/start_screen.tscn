@@ -1,7 +1,146 @@
-[gd_scene format=3 uid="uid://i1wvtervecl5"]
+[gd_scene load_steps=12 format=3 uid="uid://i1wvtervecl5"]
+
+[ext_resource type="Texture2D" uid="uid://dkclipu6srr0x" path="res://res/Background_StartScreen.png" id="1_irdiq"]
+[ext_resource type="Script" path="res://src/start_screen.gd" id="1_rhj35"]
+[ext_resource type="Texture2D" uid="uid://c34wsipdpmmww" path="res://res/Bubble.png" id="2_vt4vx"]
+[ext_resource type="Texture2D" uid="uid://dres88bkisfg1" path="res://res/MenuButtons_Trio.png" id="3_wx1eo"]
+[ext_resource type="Texture2D" uid="uid://o4d2gs7ad1qm" path="res://res/MenuButtons_Solo.png" id="4_kcvul"]
+[ext_resource type="FontFile" uid="uid://ciljxpg61awtb" path="res://res/exo-font/ExoMedium-5mMV.otf" id="5_cg766"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mos7r"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 1.0
+initial_velocity_min = 220.43
+initial_velocity_max = 360.21
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lootj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g5f1x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhlxg"]
+
+[sub_resource type="Theme" id="Theme_dnr8a"]
+default_font = ExtResource("5_cg766")
 
 [node name="StartScreen" type="Node2D"]
+script = ExtResource("1_rhj35")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="BG" type="TextureRect" parent="."]
+offset_right = 1080.0
+offset_bottom = 2000.0
+texture = ExtResource("1_irdiq")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BG"]
+modulate = Color(1, 1, 1, 0.596078)
+position = Vector2(542, 2083)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_mos7r")
+texture = ExtResource("2_vt4vx")
+lifetime = 7.0
+randomness = 0.8
+
+[node name="TrioButtonTexture" type="TextureRect" parent="."]
+offset_left = 14.0
+offset_top = 594.0
+offset_right = 1038.0
+offset_bottom = 1618.0
+texture = ExtResource("3_wx1eo")
+
+[node name="StartBtn" type="Area2D" parent="TrioButtonTexture"]
+
+[node name="StartLabel" type="RichTextLabel" parent="TrioButtonTexture/StartBtn"]
+process_mode = 4
+custom_minimum_size = Vector2(400, 150)
+offset_left = 125.0
+offset_top = 283.0
+offset_right = 525.0
+offset_bottom = 433.0
+bbcode_enabled = true
+text = "[center][font_size=160]Start[/font_size][/center]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrioButtonTexture/StartBtn"]
+position = Vector2(323, 333)
+scale = Vector2(22, 22)
+shape = SubResource("CircleShape2D_lootj")
+
+[node name="ComicBtn" type="Area2D" parent="TrioButtonTexture"]
+
+[node name="ComicLabel" type="RichTextLabel" parent="TrioButtonTexture/ComicBtn"]
+process_mode = 4
+custom_minimum_size = Vector2(400, 150)
+offset_left = 623.0
+offset_top = 458.0
+offset_right = 1023.0
+offset_bottom = 608.0
+bbcode_enabled = true
+text = "[center][font_size=100]Comic[/font_size]
+[font_size=50]TuTorial[/font_size][/center]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrioButtonTexture/ComicBtn"]
+position = Vector2(823, 500)
+scale = Vector2(15, 15)
+shape = SubResource("CircleShape2D_g5f1x")
+
+[node name="OptionsBtn" type="Area2D" parent="TrioButtonTexture"]
+
+[node name="OptionsLabel" type="RichTextLabel" parent="TrioButtonTexture/OptionsBtn"]
+process_mode = 4
+custom_minimum_size = Vector2(400, 150)
+offset_left = 264.0
+offset_top = 696.0
+offset_right = 664.0
+offset_bottom = 846.0
+bbcode_enabled = true
+text = "[center][font_size=110]Options[/font_size][/center]"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TrioButtonTexture/OptionsBtn"]
+position = Vector2(467, 741)
+scale = Vector2(19, 19)
+shape = SubResource("CircleShape2D_nhlxg")
+
+[node name="QuitButtonTexture" type="TextureRect" parent="."]
+offset_left = 735.0
+offset_top = 1657.0
+offset_right = 991.0
+offset_bottom = 1913.0
+texture = ExtResource("4_kcvul")
+
+[node name="QuitButtonLabel" type="RichTextLabel" parent="QuitButtonTexture"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 105.0
+offset_right = 228.0
+offset_bottom = 205.0
+bbcode_enabled = true
+text = "[center][font_size=80]Quit[/font_size][/center]"
+
+[node name="CreditsLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(700, 200)
+offset_left = 22.0
+offset_top = 1828.0
+offset_right = 722.0
+offset_bottom = 2028.0
+theme = SubResource("Theme_dnr8a")
+bbcode_enabled = true
+text = "[font_size=50]Credits:
+Developer: marCOmics
+@Global Game Jam 2025
+[/font_size]"
+
+[node name="Title_Temp" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(1080, 300)
+offset_top = 200.0
+offset_right = 1080.0
+offset_bottom = 500.0
+bbcode_enabled = true
+text = "[center][font_size=160]TODO: Title[/font_size][/center]"
+
+[connection signal="gui_input" from="TrioButtonTexture" to="." method="_on_trio_button_texture_gui_input"]
+[connection signal="input_event" from="TrioButtonTexture/StartBtn" to="." method="_on_start_button_input_event"]
+[connection signal="input_event" from="TrioButtonTexture/ComicBtn" to="." method="_on_comic_btn_input_event"]
+[connection signal="input_event" from="TrioButtonTexture/OptionsBtn" to="." method="_on_options_btn_input_event"]

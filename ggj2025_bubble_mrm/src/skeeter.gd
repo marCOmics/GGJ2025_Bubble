@@ -6,6 +6,7 @@ var _lastTickDegree : float = _degree
 var _game : GGJ_Game
 var _gyroscope : GGJ_Gyroscope
 
+
 func init(p_game: GGJ_Game, p_gyroscope : GGJ_Gyroscope) -> void:
 	_game = p_game
 	_gyroscope = p_gyroscope
