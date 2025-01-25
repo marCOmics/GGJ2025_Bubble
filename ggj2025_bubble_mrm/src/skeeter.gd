@@ -12,6 +12,7 @@ func init(p_game: GGJ_Game, p_gyroscope : GGJ_Gyroscope) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AnimationPlayer.play("Default")
 	pass # Replace with function body.
 
 
@@ -19,15 +20,38 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	rotation_degrees = _degree
 	
-	#if _game.on_pc():
-		##Only allow mouse/touch input on PC (for testing)
-		#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			#_degree -= 5
-		#elif  Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			#_degree += 5
-	#else: #on Mobile devices
-	_degree = _gyroscope.get_degree()
+	calc_new_degree()
+
+
+func calc_new_degree():
+	#Limit movement
+	const MAX_DEGREE_CHANGE = 8
+	var newDegree = _gyroscope.get_degree()
+	var directionClockwise : bool
+	var degreeDelta : float
 	
+	#Edge cases (to the top, where +270° meets -90°):
+	if _degree < 0 and newDegree > 180:
+		directionClockwise = false
+		degreeDelta = (90 + _degree) + (270 - newDegree)
+	elif _degree > 180 and newDegree < 0:
+		directionClockwise = true
+		degreeDelta = (90 + newDegree) + (270 - _degree)
+	else: #Usual case
+		directionClockwise = _degree < newDegree
+		degreeDelta = abs(_degree - newDegree)
+	
+	if degreeDelta > MAX_DEGREE_CHANGE:
+		if directionClockwise:
+			_degree += MAX_DEGREE_CHANGE
+		else:
+			_degree -= MAX_DEGREE_CHANGE
+	else: 
+		_degree = newDegree
+	
+	
+	#TODO: Interpolate degrees to make it smoother (limit angular movement speed!!)
+
 
 func _input(event):
 	# Mouse in viewport coordinates.
