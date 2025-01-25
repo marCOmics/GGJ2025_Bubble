@@ -45,6 +45,8 @@ shape = SubResource("CircleShape2D_0k5qo")
 
 [node name="Bubbles" type="Node2D" parent="ParallaxBackground/ParallaxDown"]
 
+[node name="Upgrades" type="Node2D" parent="ParallaxBackground/ParallaxDown"]
+
 [node name="ParallaxUp" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="WaterTap" type="Sprite2D" parent="ParallaxBackground/ParallaxUp"]
@@ -156,7 +158,6 @@ scale = Vector2(10, 10)
 shape = SubResource("CircleShape2D_0tje8")
 
 [node name="ACTMngr" parent="." instance=ExtResource("9_ci3v4")]
-position = Vector2(0, 100)
 
 [connection signal="body_entered" from="ParallaxBackground/ParallaxDown/Sink/Hole" to="." method="_on_hole_body_entered"]
 [connection signal="input_event" from="ParallaxBackground/ParallaxUp/PauseBtn/PauseArea" to="." method="_on_pause_area_input_event"]

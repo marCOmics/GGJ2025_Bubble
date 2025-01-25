@@ -15,16 +15,15 @@ var type_to_radius : Dictionary = {
 	#TODO
 }
 
-const SINK_RADIUS = 500
 var _speed := 6.0
 var _degree : float
-var _radius := SINK_RADIUS
+var _radius := GGJ_Game.SINK_RADIUS
 #var _bubbleListParent : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_degree = GGJ_Game.RNG.randf_range(-90.0, 360.0)
-	position = calc_pos(SINK_RADIUS)
+	position = calc_pos(GGJ_Game.SINK_RADIUS)
 
 
 #func init(p_degree : float) -> void:
@@ -55,6 +54,7 @@ func despawn(p_bubbleList : Node2D) -> void:
 			GGJ_Game.get_instance().end_game()
 		hide()
 		p_bubbleList.remove_child(self)
+		queue_free()
 
 
 #func _on_animation_player_animation_finished(anim_name: StringName) -> void:

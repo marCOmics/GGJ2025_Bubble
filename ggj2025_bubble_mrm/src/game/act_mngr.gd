@@ -3,7 +3,7 @@ class_name GGF_ACTMngr
 
 @onready var _actPanel = $ACTPanel
 
-var _timeTillNextACT : float =  6
+var _timeTillNextACT : float =  4
 var _currACT : ACT_TYPES
 
 enum ACT_TYPES{
@@ -20,11 +20,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	const MIN_TIME_TO_SPAWN = 5.0
-	const MAX_TIME_TO_SPAWN = 12.0
+	const MAX_TIME_TO_SPAWN = 12.0 
 	
 	_timeTillNextACT -= delta
 	
 	if _timeTillNextACT <= 0:
-		var act_type = GGJ_Game.RNG.randi_range(GGF_ACTMngr.ACT_TYPES.AVOID, 2)
+		_currACT = GGJ_Game.RNG.randi_range(GGF_ACTMngr.ACT_TYPES.AVOID, 2)
 		_actPanel.show()
+		$AnimationPlayer.play("Enter")
+		_actPanel.frame = _currACT
 		_timeTillNextACT = GGJ_Game.RNG.randf_range(MIN_TIME_TO_SPAWN, MAX_TIME_TO_SPAWN)

@@ -1,12 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://4bxgh2couqhq"]
+[gd_scene load_steps=6 format=3 uid="uid://4bxgh2couqhq"]
 
 [ext_resource type="Script" path="res://src/game/act_mngr.gd" id="1_7pr48"]
 [ext_resource type="Texture2D" uid="uid://cmcjmitv3xrvo" path="res://res/ACTs.png" id="2_eusgw"]
+
+[sub_resource type="Animation" id="Animation_ftwky"]
+resource_name = "Enter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333, 0.333333, 0.433333, 0.466667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(-30, -20), Vector2(50, -5), Vector2(-16, 18), Vector2(-16, 18), Vector2(4, -5), Vector2(4, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5vsmd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gp8t6"]
+_data = {
+"Enter": SubResource("Animation_ftwky"),
+"RESET": SubResource("Animation_5vsmd")
+}
 
 [node name="ACTMngr" type="Node2D"]
 script = ExtResource("1_7pr48")
 
 [node name="ACTPanel" type="Sprite2D" parent="."]
-position = Vector2(10, 762)
 texture = ExtResource("2_eusgw")
+offset = Vector2(0, 850)
 vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gp8t6")
+}
