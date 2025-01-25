@@ -1,9 +1,13 @@
 extends Node2D
 class_name GGJ_Game
 
+var bubbleSCN = preload("res://src/bubble.tscn")
 @onready var _gyroscope := $Gyroscope
 @onready var _skeeter := $ParallaxBackground/ParallaxDown/Skeeter
 @onready var _label := $ParallaxBackground/ParallaxUp/Panel/RichTextLabel
+
+static var RNG = RandomNumberGenerator.new()
+var _timeTillNextBubbleSpawn : float =  1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +24,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	spawn_bubbles(delta)
 	
 	#Update richtext label
 	_label.text = "[font_size=70]x: " + str(_gyroscope.get_rotation().normalized().x) + "\n" + \
@@ -33,4 +38,15 @@ static func on_pc() -> bool:
 		return true
 	else: 
 		return false
+
+
+func spawn_bubbles(p_delta: float) -> void:
+	const MIN_TIME_TO_SPAWN = 0.5
+	const MAX_TIME_TO_SPAWN = 3.0
+	_timeTillNextBubbleSpawn -= p_delta 
+	#print("Time till spawn: " + str(_timeTillNextBubbleSpawn))
 	
+	if _timeTillNextBubbleSpawn <= 0:
+		var newBubble := bubbleSCN.instantiate()
+		$ParallaxBackground/ParallaxDown/Bubbles.add_child(newBubble)
+		_timeTillNextBubbleSpawn = RNG.randf_range(MIN_TIME_TO_SPAWN, MAX_TIME_TO_SPAWN)

@@ -2,6 +2,7 @@ extends Sprite2D
 
 
 var _degree : float = 0.0
+var _lastTickDegree : float = _degree
 var _game : GGJ_Game
 var _gyroscope : GGJ_Gyroscope
 
@@ -24,9 +25,10 @@ func _process(delta: float) -> void:
 
 
 func calc_new_degree():
-	#Limit movement
-	const MAX_DEGREE_CHANGE = 8
 	var newDegree = _gyroscope.get_degree()
+	
+	#Limit angular movement
+	const MAX_DEGREE_CHANGE = 8
 	var directionClockwise : bool
 	var degreeDelta : float
 	
@@ -47,10 +49,22 @@ func calc_new_degree():
 		else:
 			_degree -= MAX_DEGREE_CHANGE
 	else: 
+		#Interpolate degrees with last value to make it smoother
+		#if newDegree < -90 + MAX_DEGREE_CHANGE and _lastTickDegree > 270 - MAX_DEGREE_CHANGE:
+			#
+		#elif newDegree < -90 + MAX_DEGREE_CHANGE and _lastTickDegree > 270 - MAX_DEGREE_CHANGE: #TODO
+		
+		
+		#var newDegreeTemp = newDegree
+		#if newDegreeTemp < 0: newDegreeTemp += 360
+		#var _lastTickDegreeTemp = _lastTickDegree
+		#if _lastTickDegreeTemp < 0: _lastTickDegreeTemp += 360
+		#
+		#newDegree = (_lastTickDegreeTemp + newDegreeTemp) / 2
+		#if newDegree >= 360: newDegree -= 360
+		
+		_lastTickDegree = _degree
 		_degree = newDegree
-	
-	
-	#TODO: Interpolate degrees to make it smoother (limit angular movement speed!!)
 
 
 func _input(event):

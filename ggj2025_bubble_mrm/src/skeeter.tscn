@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4egxis0vcv8j"]
+[gd_scene load_steps=7 format=3 uid="uid://b4egxis0vcv8j"]
 
 [ext_resource type="Texture2D" uid="uid://bmmkeggy7pvo2" path="res://res/Skeeter.png" id="1_pfnr4"]
 [ext_resource type="Script" path="res://src/skeeter.gd" id="2_w2mx3"]
@@ -41,6 +41,8 @@ _data = {
 "RESET": SubResource("Animation_xukdd")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhv56"]
+
 [node name="Skeeter" type="Sprite2D"]
 texture = ExtResource("1_pfnr4")
 offset = Vector2(100, 0)
@@ -51,3 +53,10 @@ script = ExtResource("2_w2mx3")
 libraries = {
 "": SubResource("AnimationLibrary_dphl7")
 }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(100, 0)
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_bhv56")

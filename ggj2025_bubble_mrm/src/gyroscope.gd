@@ -42,5 +42,5 @@ func get_degree() -> int:
 	if rot.x < 0:
 		degrees += 180
 	
-	print("Degrees: " + str(degrees))
+	#print("Degrees: " + str(degrees))
 	return degrees #tan^-1(Gegenkathete/Ankathetee)
