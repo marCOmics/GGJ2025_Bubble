@@ -1,31 +1,33 @@
 extends Sprite2D
 
 
-var m_degree : float = 0.0
-const MODELNAME_PC := "GenericDevice"
-var m_modelname : String = ""
+var _degree : float = 0.0
+var _game : GGJ_Game
+var _gyroscope : GGJ_Gyroscope
+
+func init(p_game: GGJ_Game, p_gyroscope : GGJ_Gyroscope) -> void:
+	_game = p_game
+	_gyroscope = p_gyroscope
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	m_modelname = OS.get_model_name()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	rotation_degrees = m_degree
+	rotation_degrees = _degree
 	
-	#Only allow mouse/touch input on PC (for testing)
-	if m_modelname == MODELNAME_PC:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			m_degree -= 5
-		elif  Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			m_degree += 5
+	#if _game.on_pc():
+		##Only allow mouse/touch input on PC (for testing)
+		#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			#_degree -= 5
+		#elif  Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+			#_degree += 5
+	#else: #on Mobile devices
+	_degree = _gyroscope.get_degree()
 	
-	var gyroscope_rotation = Input.get_gyroscope()
-	rotation = gyroscope_rotation
-	
-
 
 func _input(event):
 	# Mouse in viewport coordinates.

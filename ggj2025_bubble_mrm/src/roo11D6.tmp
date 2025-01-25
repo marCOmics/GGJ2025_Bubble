@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://vg4ysocm2e6b"]
+
+[ext_resource type="PackedScene" uid="uid://dltagou3gheta" path="res://src/bubble.tscn" id="1_7228i"]
+[ext_resource type="Script" path="res://src/game.gd" id="1_mdjyi"]
+[ext_resource type="Texture2D" uid="uid://do0ahv27t2cw0" path="res://res/Background.png" id="2_3brtk"]
+[ext_resource type="Texture2D" uid="uid://bibqqg54l7sut" path="res://res/Sink.png" id="2_doqv5"]
+[ext_resource type="Texture2D" uid="uid://dsb7m3j866tdf" path="res://res/Bubbles.png" id="4_a8yu8"]
+[ext_resource type="Texture2D" uid="uid://c7y5vwgcm5hdb" path="res://res/WaterTap.png" id="4_xdhea"]
+[ext_resource type="PackedScene" uid="uid://b4egxis0vcv8j" path="res://src/skeeter.tscn" id="5_6h363"]
+[ext_resource type="PackedScene" uid="uid://dkajoq0ekgo1v" path="res://src/gyroscope.tscn" id="7_hvrbt"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(0, -100)
+script = ExtResource("1_mdjyi")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(540, 1000)
+transform = Transform2D(1, 0, 0, 1, 540, 1000)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground"]
+
+[node name="ParallaxDown" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxDown"]
+texture = ExtResource("2_3brtk")
+
+[node name="Sink" type="Sprite2D" parent="ParallaxBackground/ParallaxDown"]
+texture = ExtResource("2_doqv5")
+
+[node name="Bubble" parent="ParallaxBackground/ParallaxDown" instance=ExtResource("1_7228i")]
+visible = false
+position = Vector2(181, -182)
+texture = ExtResource("4_a8yu8")
+hframes = 8
+
+[node name="Skeeter" parent="ParallaxBackground/ParallaxDown" instance=ExtResource("5_6h363")]
+
+[node name="ParallaxUp" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="WaterTap" type="Sprite2D" parent="ParallaxBackground/ParallaxUp"]
+position = Vector2(0, -664)
+texture = ExtResource("4_xdhea")
+
+[node name="Panel" type="Panel" parent="ParallaxBackground/ParallaxUp"]
+custom_minimum_size = Vector2(1000, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = 600.0
+offset_right = 400.0
+offset_bottom = 900.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ParallaxBackground/ParallaxUp/Panel"]
+custom_minimum_size = Vector2(1000, 300)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "test"
+
+[node name="Gyroscope" parent="." instance=ExtResource("7_hvrbt")]
