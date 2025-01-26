@@ -9,11 +9,12 @@ enum UPGRADE_TYPES{
 static var RNG = RandomNumberGenerator.new()
 var _speed := 6.0
 var _degree : float
-var _radius := GGJ_Game.SINK_RADIUS
+var _radiusToSinkhole := GGJ_Game.SINK_RADIUS
 var _type : UPGRADE_TYPES
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_degree = GGJ_Game.RNG.randf_range(-90.0, 360.0)
 	position = calc_pos(GGJ_Game.SINK_RADIUS)
 	_type = RNG.randi_range(UPGRADE_TYPES.SPIKY_TOOTHBRUSH, \
 							UPGRADE_TYPES.SPIKY_TOOTHBRUSH)
@@ -21,8 +22,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	_radius -= _speed
-	position = calc_pos(_radius)
+	_radiusToSinkhole -= _speed
+	position = calc_pos(_radiusToSinkhole)
 
 
 func calc_pos(p_radius: float, p_degree : float = _degree) -> Vector2:

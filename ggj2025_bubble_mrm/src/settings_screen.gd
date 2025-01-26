@@ -37,7 +37,10 @@ func toggle_input_method() -> void:
 
 
 func _update_labels() -> void:
+	#Input method
 	var typeString = "Gyroscope" if Settings.input_is_gyroscope() else "Touch"
-	
 	_inputBtn.text = \
 		"[center][font_size=65]" + typeString + "[/font_size][/center]"
+	
+	#Highscore
+	$HighscoreLbl.text = "[center][font_size=80]Highscore: " + str(Settings.get_highscore()) + "[/font_size][/center]"

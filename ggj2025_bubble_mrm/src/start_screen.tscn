@@ -131,14 +131,13 @@ shape = SubResource("CircleShape2D_udhef")
 
 [node name="CreditsLabel" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(700, 200)
-offset_left = 22.0
-offset_top = 1828.0
-offset_right = 722.0
-offset_bottom = 2028.0
+offset_left = 31.0
+offset_top = 1864.0
+offset_right = 731.0
+offset_bottom = 2064.0
 theme = SubResource("Theme_dnr8a")
 bbcode_enabled = true
-text = "[font_size=50]Credits:
-Developer: marCOmics
+text = "[font_size=50]by marCOmics
 @Global Game Jam 2025
 [/font_size]"
 

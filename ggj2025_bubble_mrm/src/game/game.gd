@@ -2,7 +2,6 @@ extends Node2D
 class_name GGJ_Game
 
 const SINK_RADIUS = 500
-var bubbleSCN = preload("res://src/game/bubble.tscn")
 var upgradeSCN = preload("res://src/game/upgrade.tscn")
 @onready var _gyroscope := $Gyroscope
 @onready var _skeeter := $ParallaxBackground/ParallaxDown/Skeeter
@@ -10,12 +9,12 @@ var upgradeSCN = preload("res://src/game/upgrade.tscn")
 @onready var _bubbleList := $ParallaxBackground/ParallaxDown/Bubbles
 @onready var _upgradeList := $ParallaxBackground/ParallaxDown/Upgrades
 @onready var _pauseOrGameoverLabel = $ParallaxBackground/PauseOrGameOverTint/CanvasLayer/PauseOrGameOverLabel
+@onready var _ACTMngr = $ParallaxBackground/ParallaxUp/ACTMngr
 
 
 static var RNG = RandomNumberGenerator.new()
 static var _instance : GGJ_Game #Singleton Pattern
-var _timeTillNextBubbleSpawn : float =  1
-var _timeTillNextUpgrade : float = 8
+var _timeTillNextUpgrade : float = 6
 
 
 
@@ -24,12 +23,11 @@ func _ready() -> void:
 	_skeeter.init(self, _gyroscope)
 	_instance = self
 	$ParallaxBackground/PauseOrGameOverTint.hide()
-	$ACTMngr.init($ParallaxBackground/ParallaxUp/Level/LevelLbl)
+	_ACTMngr.init($ParallaxBackground/ParallaxUp/Level/LevelLbl, _bubbleList)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	spawn_bubbles(delta)
 	spawn_upgrade(delta)
 	
 	##Update richtext label
@@ -56,24 +54,13 @@ func end_game() -> void:
 	toggle_pause()
 	_pauseOrGameoverLabel.text = "[center][font_size=200]GAME OVER[/font_size][/center]" 
 	$ParallaxBackground/PauseOrGameOverTint/CanvasLayer/ContinueBtn.hide()
+	Settings.add_highscore(_ACTMngr.get_level())
 
-
-func spawn_bubbles(p_delta: float) -> void:
-	const MIN_TIME_TO_SPAWN = 0.5
-	const MAX_TIME_TO_SPAWN = 3.0
-	
-	_timeTillNextBubbleSpawn -= p_delta 
-	
-	if _timeTillNextBubbleSpawn <= 0:
-		var newBubble := bubbleSCN.instantiate()
-		newBubble.position = Vector2(1000, 0)  #so it doesn't trigger the collision when spawning, quick and dirty fix
-		_bubbleList.add_child(newBubble)
-		_timeTillNextBubbleSpawn = RNG.randf_range(MIN_TIME_TO_SPAWN, MAX_TIME_TO_SPAWN)
 
 
 func spawn_upgrade(p_delta: float) -> void:
-	const MIN_TIME_TO_SPAWN = 8
-	const MAX_TIME_TO_SPAWN = 14
+	const MIN_TIME_TO_SPAWN = 10
+	const MAX_TIME_TO_SPAWN = 20
 	
 	_timeTillNextUpgrade -= p_delta
 	
@@ -98,10 +85,6 @@ func _on_hole_body_entered(body: Node2D) -> void:
 
 
 func despawn_bubble(p_body: Node2D) -> void:
-	#print("Despawn bubble " + str(p_body)+ " from: " + str(_bubbleList.get_children()))
-	
-	#for child in _bubbleList.get_children():
-		#if child == p_body.get_parent():
 	var bubbleToDespawn : GGJ_Bubble = p_body.get_parent()
 	bubbleToDespawn.despawn(_bubbleList)
 
@@ -130,6 +113,7 @@ func _on_continue_area_input_event(viewport: Node, event: InputEvent, shape_idx:
 
 func _on_quit_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton && event.is_released():
+		Settings.add_highscore(_ACTMngr.get_level())
 		toggle_pause()
 		#while Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			#pass #wait till release, QUICK AND DIRTY, how we LIKE IT ;P

@@ -102,5 +102,14 @@ position = Vector2(257, 260)
 scale = Vector2(15, 15)
 shape = SubResource("CircleShape2D_rmjmq")
 
+[node name="HighscoreLbl" type="RichTextLabel" parent="."]
+process_mode = 4
+custom_minimum_size = Vector2(800, 100)
+offset_top = 773.0
+offset_right = 1080.0
+offset_bottom = 873.0
+bbcode_enabled = true
+text = "[center][font_size=80]Highscore:[/font_size][/center]"
+
 [connection signal="input_event" from="BackButtonTexture/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="input_event" from="InputBtn/InputArea" to="." method="_on_input_area_input_event"]

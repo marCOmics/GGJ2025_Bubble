@@ -44,12 +44,19 @@ _data = {
 script = ExtResource("1_7pr48")
 
 [node name="ACTPanel" type="Sprite2D" parent="."]
+position = Vector2(0, 770)
 texture = ExtResource("2_eusgw")
-centered = false
-offset = Vector2(0, 850)
 vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gp8t6")
 }
+
+[node name="LabelTestMic" type="Label" parent="."]
+offset_left = -300.0
+offset_right = 187.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 100
+text = "Mic Volume: 
+"

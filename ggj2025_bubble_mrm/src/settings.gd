@@ -8,6 +8,7 @@ enum INPUT_METHOD{
 }
 
 var _input: INPUT_METHOD = INPUT_METHOD.GYROSCOPE
+var _highscore: int #in levels
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,6 +45,8 @@ func read_file() -> void:
 			match key:
 				"input":
 					_input = node_data[key]
+				"highscore":
+					_highscore = node_data[key]
 				_:
 					continue
 			#new_object.set(key, node_data[key])
@@ -57,6 +60,7 @@ func save_file(p_initial: bool = false) -> void:
 	
 	var settingsFileContents = {
 		"input": _input,
+		"highscore" : _highscore,
 	}
 	
 	var json_string = JSON.stringify(settingsFileContents)
@@ -71,3 +75,13 @@ func set_input_method(p_input : INPUT_METHOD) -> void:
 
 func input_is_gyroscope() -> bool:
 	return _input == INPUT_METHOD.GYROSCOPE
+
+
+func add_highscore(p_level: int) -> void:
+	if _highscore < p_level:
+		_highscore = p_level
+		save_file()
+
+
+func get_highscore() -> int:
+	return _highscore
