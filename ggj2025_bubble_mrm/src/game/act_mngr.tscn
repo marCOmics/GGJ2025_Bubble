@@ -67,3 +67,4 @@ text = "Mic Volume:
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMicrophone_u0oql")
 autoplay = true
+stream_paused = true

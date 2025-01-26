@@ -38,9 +38,12 @@ func _process(delta: float) -> void:
 	update_ACTs(delta)
 	spawn_bubbles(delta)
 	
-	#i used abs() here but it probably isn't necessary, I just needed to know if there was sound input or not. so this was my quick solution 
+	##TEST MIC:
+	#if Input.is_action_just_pressed("ui_text_backspace"):
+		#for node in _bubbleList.get_children():
+			#var bubble : GGJ_Bubble = node
+			#bubble._on_mic_was_blowed()
 	
-	var volume
 	
 	var idx = AudioServer.get_bus_index("Master")
 	## And use it to retrieve its first effect, which has been defined
@@ -51,11 +54,14 @@ func _process(delta: float) -> void:
 	#if recording != null:
 		#print("Recording Data: " + str(recording.data))
 	
-	volume = abs(AudioServer.get_bus_peak_volume_left_db(idx, 0))
+	var volume = abs(AudioServer.get_bus_peak_volume_left_db(idx, 0))
 	const VOLUME_THRESHOLD_FOR_BLOW = 10.0
 	
 	if volume < VOLUME_THRESHOLD_FOR_BLOW:
 		mic_was_blowed.emit()
+		#for node in _bubbleList.get_children():
+			#var bubble : GGJ_Bubble = node
+			#bubble._on_mic_was_blowed()
 
 
 func update_ACTs(delta: float) -> void:

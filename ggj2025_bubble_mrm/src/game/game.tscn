@@ -327,7 +327,7 @@ libraries = {
 modulate = Color(1, 1, 1, 0.454902)
 position = Vector2(897, -91)
 texture = ExtResource("12_0b0y3")
-offset = Vector2(130, 1200)
+offset = Vector2(660, 1150)
 
 [node name="Hand2" type="Sprite2D" parent="HandAnimation"]
 modulate = Color(1, 1, 1, 0.454902)

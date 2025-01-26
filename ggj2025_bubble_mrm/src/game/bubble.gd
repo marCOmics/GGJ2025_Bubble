@@ -111,8 +111,9 @@ func _on_character_body_2d_input_event(viewport: Node, event: InputEvent, shape_
 
 func _on_mic_was_blowed() -> void:
 	if _type == BUBBLE_TYPE.FOAM:
-		_speed = -4.0
-		await $AnimationPlayer.play("Disperse")
+		_speed = -8.0
+		$AnimationPlayer.play("Disperse")
+		await $AnimationPlayer.animation_finished
 		
 		#bubble list removal?
 		queue_free()
