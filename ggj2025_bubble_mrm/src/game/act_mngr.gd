@@ -38,12 +38,6 @@ func _process(delta: float) -> void:
 	update_ACTs(delta)
 	spawn_bubbles(delta)
 	
-	##TEST MIC:
-	#if Input.is_action_just_pressed("ui_text_backspace"):
-		#for node in _bubbleList.get_children():
-			#var bubble : GGJ_Bubble = node
-			#bubble._on_mic_was_blowed()
-	
 	
 	var idx = AudioServer.get_bus_index("Master")
 	## And use it to retrieve its first effect, which has been defined
@@ -58,10 +52,19 @@ func _process(delta: float) -> void:
 	const VOLUME_THRESHOLD_FOR_BLOW = 10.0
 	
 	if volume < VOLUME_THRESHOLD_FOR_BLOW:
+		$MicSymbol.show()
 		mic_was_blowed.emit()
 		#for node in _bubbleList.get_children():
 			#var bubble : GGJ_Bubble = node
 			#bubble._on_mic_was_blowed()
+	else:
+		$MicSymbol.hide()
+	
+	#MIC BLOW for PC
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		for node in _bubbleList.get_children():
+			var bubble : GGJ_Bubble = node
+			bubble._on_mic_was_blowed()
 
 
 func update_ACTs(delta: float) -> void:
@@ -101,7 +104,8 @@ func spawn_bubbles(p_delta: float) -> void:
 			MIN_TIME_TO_SPAWN = 0.3
 			MAX_TIME_TO_SPAWN = 0.5
 		ACT_TYPES.POP:
-			pass
+			MIN_TIME_TO_SPAWN = 0.4
+			MAX_TIME_TO_SPAWN = 0.7
 		ACT_TYPES.BLOW:
 			MIN_TIME_TO_SPAWN = 2.0
 			MAX_TIME_TO_SPAWN = 4.5
