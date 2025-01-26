@@ -15,7 +15,7 @@ var upgradeSCN = preload("res://src/game/upgrade.tscn")
 static var RNG = RandomNumberGenerator.new()
 static var _instance : GGJ_Game #Singleton Pattern
 var _timeTillNextBubbleSpawn : float =  1
-var _timeTillNextUpgrade : float = 6
+var _timeTillNextUpgrade : float = 8
 
 
 
@@ -24,6 +24,7 @@ func _ready() -> void:
 	_skeeter.init(self, _gyroscope)
 	_instance = self
 	$ParallaxBackground/PauseOrGameOverTint.hide()
+	$ACTMngr.init($ParallaxBackground/ParallaxUp/Level/LevelLbl)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,8 +72,8 @@ func spawn_bubbles(p_delta: float) -> void:
 
 
 func spawn_upgrade(p_delta: float) -> void:
-	const MIN_TIME_TO_SPAWN = 3
-	const MAX_TIME_TO_SPAWN = 8
+	const MIN_TIME_TO_SPAWN = 8
+	const MAX_TIME_TO_SPAWN = 14
 	
 	_timeTillNextUpgrade -= p_delta
 	

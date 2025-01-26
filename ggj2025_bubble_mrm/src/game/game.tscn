@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://vg4ysocm2e6b"]
+[gd_scene load_steps=13 format=3 uid="uid://vg4ysocm2e6b"]
 
 [ext_resource type="Script" path="res://src/game/game.gd" id="1_lkrp0"]
 [ext_resource type="PackedScene" uid="uid://dkajoq0ekgo1v" path="res://src/game/gyroscope.tscn" id="2_mh5cp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b4egxis0vcv8j" path="res://src/game/skeeter.tscn" id="5_yeumy"]
 [ext_resource type="Texture2D" uid="uid://c7y5vwgcm5hdb" path="res://res/WaterTap.png" id="6_pemya"]
 [ext_resource type="Texture2D" uid="uid://o4d2gs7ad1qm" path="res://res/MenuButtons_Solo.png" id="7_r47c0"]
+[ext_resource type="Texture2D" uid="uid://6jxpdx56528t" path="res://res/EmptyBubble.png" id="8_38g4j"]
 [ext_resource type="Texture2D" uid="uid://bgn54sh0qdxgo" path="res://res/MenuButton_Solo_Big.png" id="8_gmn3f"]
 [ext_resource type="PackedScene" uid="uid://4bxgh2couqhq" path="res://src/game/act_mngr.tscn" id="9_ci3v4"]
 
@@ -84,9 +85,30 @@ position = Vector2(124, 130)
 scale = Vector2(10, 10)
 shape = SubResource("CircleShape2D_0tje8")
 
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxUp"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Level" type="TextureRect" parent="ParallaxBackground/ParallaxUp"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -517.0
+offset_top = -937.0
+offset_right = -261.0
+offset_bottom = -681.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_38g4j")
+
+[node name="LevelLbl" type="RichTextLabel" parent="ParallaxBackground/ParallaxUp/Level"]
+process_mode = 4
+custom_minimum_size = Vector2(200, 120)
+offset_left = 28.0
+offset_top = 84.0
+offset_right = 228.0
+offset_bottom = 204.0
+bbcode_enabled = true
+text = "[center][font_size=75]Level
+1[/font_size][/center]"
 
 [node name="PauseOrGameOverTint" type="CanvasModulate" parent="ParallaxBackground"]
 visible = false

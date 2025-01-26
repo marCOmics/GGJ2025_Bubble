@@ -11,7 +11,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	if GGJ_Game.on_pc():
+	if GGJ_Game.on_pc() or !Settings.input_is_gyroscope():
 		#Emulate gyroscope on pc
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			var mousePosFromCenter := get_viewport().get_mouse_position()

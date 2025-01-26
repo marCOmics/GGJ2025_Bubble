@@ -98,8 +98,7 @@ offset_top = 696.0
 offset_right = 664.0
 offset_bottom = 846.0
 bbcode_enabled = true
-text = "[center][font_size=100]Settings
-(score?)[/font_size][/center]"
+text = "[center][font_size=100]Settings[/font_size][/center]"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="TrioButtonTexture/SettingsBtn"]
 position = Vector2(467, 741)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://m7f6joerpjvx"]
 
-[ext_resource type="Script" path="res://src/settings.gd" id="1_jo40o"]
+[ext_resource type="Script" path="res://src/settings_screen.gd" id="1_jo40o"]
 [ext_resource type="Texture2D" uid="uid://dkclipu6srr0x" path="res://res/Background_StartScreen.png" id="2_pvlvt"]
 [ext_resource type="Texture2D" uid="uid://c34wsipdpmmww" path="res://res/Bubble.png" id="3_edwhe"]
 [ext_resource type="Texture2D" uid="uid://o4d2gs7ad1qm" path="res://res/MenuButtons_Solo.png" id="4_4tjsg"]

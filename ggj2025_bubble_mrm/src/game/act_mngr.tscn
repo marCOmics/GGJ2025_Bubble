@@ -45,6 +45,7 @@ script = ExtResource("1_7pr48")
 
 [node name="ACTPanel" type="Sprite2D" parent="."]
 texture = ExtResource("2_eusgw")
+centered = false
 offset = Vector2(0, 850)
 vframes = 4
 

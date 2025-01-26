@@ -2,9 +2,11 @@ extends Node
 class_name GGF_ACTMngr
 
 @onready var _actPanel = $ACTPanel
+var _levelLbl: RichTextLabel
 
 var _timeTillNextACT : float =  4
 var _currACT : ACT_TYPES
+var _level : int = 1
 
 enum ACT_TYPES{
 	AVOID = 0,
@@ -15,6 +17,9 @@ enum ACT_TYPES{
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_actPanel.hide()
+
+func init(p_levelLbl : RichTextLabel) -> void:
+	_levelLbl = p_levelLbl
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,3 +35,8 @@ func _process(delta: float) -> void:
 		$AnimationPlayer.play("Enter")
 		_actPanel.frame = _currACT
 		_timeTillNextACT = GGJ_Game.RNG.randf_range(MIN_TIME_TO_SPAWN, MAX_TIME_TO_SPAWN)
+
+
+func level_up() -> void:
+	_levelLbl.text = "[center][font_size=75]Level
+" + str(_level) + "[/font_size][/center]"
