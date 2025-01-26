@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://i1wvtervecl5"]
+[gd_scene load_steps=16 format=3 uid="uid://i1wvtervecl5"]
 
 [ext_resource type="Texture2D" uid="uid://dkclipu6srr0x" path="res://res/Background_StartScreen.png" id="1_irdiq"]
 [ext_resource type="Script" path="res://src/start_screen.gd" id="1_rhj35"]
@@ -28,6 +28,12 @@ gravity = Vector3(0, 0, 0)
 
 [sub_resource type="Theme" id="Theme_dnr8a"]
 default_font = ExtResource("5_cg766")
+
+[sub_resource type="Gradient" id="Gradient_6g1jh"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ybly"]
+gradient = SubResource("Gradient_6g1jh")
 
 [node name="StartScreen" type="Node2D"]
 script = ExtResource("1_rhj35")
@@ -145,6 +151,13 @@ text = "[font_size=50]by marCOmics
 offset_right = 1080.0
 offset_bottom = 720.0
 texture = ExtResource("7_gord4")
+
+[node name="BLACK_PANEL" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1080, 400)
+offset_top = 2000.0
+offset_right = 1080.0
+offset_bottom = 2300.0
+texture = SubResource("GradientTexture1D_3ybly")
 
 [connection signal="gui_input" from="TrioButtonTexture" to="." method="_on_trio_button_texture_gui_input"]
 [connection signal="input_event" from="TrioButtonTexture/StartBtn" to="." method="_on_start_button_input_event"]

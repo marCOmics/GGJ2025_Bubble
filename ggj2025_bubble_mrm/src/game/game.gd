@@ -15,6 +15,8 @@ var upgradeSCN = preload("res://src/game/upgrade.tscn")
 static var RNG = RandomNumberGenerator.new()
 static var _instance : GGJ_Game #Singleton Pattern
 var _timeTillNextUpgrade : float = 6
+const HANDWASH_TIME = 18
+var _timeTillNextHandWash : float = HANDWASH_TIME
 
 
 
@@ -29,6 +31,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	spawn_upgrade(delta)
+	
+	_timeTillNextHandWash -= delta
+	if _timeTillNextHandWash <= 0:
+		$HandAnimation.play("WashingHands")
+		_timeTillNextHandWash = HANDWASH_TIME
 	
 	##Update richtext label
 	#_label.text = "[font_size=70]x: " + str(_gyroscope.get_rotation().normalized().x) + "\n" + \

@@ -10,6 +10,7 @@ func _process(delta: float) -> void:
 	if GGJ_Game.on_pc() or !Settings.input_is_gyroscope():
 		#Touch/Mouse control
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			#TODO: IGNORE INPUT IF A BUBBLE WAS CLICKED (how to check?)
 			var mousePosFromCenter := get_viewport().get_mouse_position()
 			mousePosFromCenter = Vector2(mousePosFromCenter.x * FACTOR - get_window().size.x, \
 										 mousePosFromCenter.y * FACTOR - get_window().size.y)

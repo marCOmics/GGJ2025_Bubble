@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vg4ysocm2e6b"]
+[gd_scene load_steps=21 format=3 uid="uid://vg4ysocm2e6b"]
 
 [ext_resource type="Script" path="res://src/game/game.gd" id="1_lkrp0"]
 [ext_resource type="PackedScene" uid="uid://dkajoq0ekgo1v" path="res://src/game/gyroscope.tscn" id="2_mh5cp"]
@@ -11,17 +11,139 @@
 [ext_resource type="Texture2D" uid="uid://6jxpdx56528t" path="res://res/EmptyBubble.png" id="8_38g4j"]
 [ext_resource type="Texture2D" uid="uid://bgn54sh0qdxgo" path="res://res/MenuButton_Solo_Big.png" id="8_gmn3f"]
 [ext_resource type="PackedScene" uid="uid://4bxgh2couqhq" path="res://src/game/act_mngr.tscn" id="9_ci3v4"]
+[ext_resource type="Texture2D" uid="uid://3s18wruepnnl" path="res://res/Hands.png" id="12_0b0y3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0k5qo"]
 
+[sub_resource type="Curve" id="Curve_iogbu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.527472), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dag1u"]
+curve = SubResource("Curve_iogbu")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qiyts"]
 particle_flag_disable_z = true
-emission_shape_scale = Vector3(5, 5, 1)
+emission_shape_scale = Vector3(3, 3, 1)
 emission_shape = 1
 emission_sphere_radius = 10.0
+direction = Vector3(0, 1, 0)
+spread = 2.0
+initial_velocity_min = 682.79
+initial_velocity_max = 720.42
 gravity = Vector3(0, 300, 0)
+scale_curve = SubResource("CurveTexture_dag1u")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0tje8"]
+
+[sub_resource type="Animation" id="Animation_ka4tf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandAnimation/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(897, -91)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HandAnimation/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandAnimation/Hand2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1581, 1218)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HandAnimation/Hand2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_2soek"]
+resource_name = "WashingHands"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandAnimation/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2.16667, 2.7, 3.36667, 3.86667, 4.4, 4.9, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(897, -91), Vector2(418, -184), Vector2(418, -154), Vector2(403, 11), Vector2(418, -74), Vector2(403, 11), Vector2(418, -74), Vector2(403, 11), Vector2(418, -74), Vector2(897, -91)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HandAnimation/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.0333333, 1, 1.5, 2.16667, 2.7, 3.36667, 3.86667, 4.4, 4.9, 5.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.523599, 0.0, 0.0872665, 0.0872665, 0.0872665, 0.0872665, 0.0872665, 0.0872665, 0.0872665, -0.523599]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandAnimation/Hand2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2.16667, 2.7, 3.36667, 3.86667, 4.4, 4.9, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1581, 1218), Vector2(883, 1143), Vector2(883, 1173), Vector2(898, 988), Vector2(883, 1093), Vector2(898, 988), Vector2(883, 1093), Vector2(898, 988), Vector2(883, 1093), Vector2(1581, 1218)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HandAnimation/Hand2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2.16667, 2.7, 3.36667, 3.86667, 4.4, 4.9, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.523599, 0.0, 0.0872665, 0.0872665, 0.0872665, 0.0872665, 0.0872665, 0.0872665, 0.0872665, -0.523599]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gkjye"]
+_data = {
+"RESET": SubResource("Animation_ka4tf"),
+"WashingHands": SubResource("Animation_2soek")
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lkrp0")
@@ -59,10 +181,10 @@ shape = SubResource("CircleShape2D_0k5qo")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxBackground/ParallaxUp"]
 position = Vector2(0, -500)
-amount = 30
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_qiyts")
 texture = ExtResource("6_eix0k")
-lifetime = 0.7
+lifetime = 0.2
 
 [node name="WaterTap" type="Sprite2D" parent="ParallaxBackground/ParallaxUp"]
 position = Vector2(0, -700)
@@ -195,6 +317,22 @@ text = "[center][font_size=80]Quit[/font_size][/center]"
 position = Vector2(124, 130)
 scale = Vector2(10, 10)
 shape = SubResource("CircleShape2D_0tje8")
+
+[node name="HandAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gkjye")
+}
+
+[node name="Hand" type="Sprite2D" parent="HandAnimation"]
+modulate = Color(1, 1, 1, 0.454902)
+position = Vector2(897, -91)
+texture = ExtResource("12_0b0y3")
+offset = Vector2(130, 1200)
+
+[node name="Hand2" type="Sprite2D" parent="HandAnimation"]
+modulate = Color(1, 1, 1, 0.454902)
+position = Vector2(1581, 1218)
+texture = ExtResource("12_0b0y3")
 
 [connection signal="body_entered" from="ParallaxBackground/ParallaxDown/Sink/Hole" to="." method="_on_hole_body_entered"]
 [connection signal="input_event" from="ParallaxBackground/ParallaxUp/PauseBtn/PauseArea" to="." method="_on_pause_area_input_event"]

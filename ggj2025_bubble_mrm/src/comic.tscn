@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://m7f6joerpjvx"]
+[gd_scene load_steps=10 format=3 uid="uid://m7f6joerpjvx"]
 
 [ext_resource type="Script" path="res://src/settings_screen.gd" id="1_jo40o"]
 [ext_resource type="Texture2D" uid="uid://dkclipu6srr0x" path="res://res/Background_StartScreen.png" id="2_pvlvt"]
@@ -17,6 +17,12 @@ initial_velocity_max = 360.21
 gravity = Vector3(0, 0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_udhef"]
+
+[sub_resource type="Gradient" id="Gradient_vanlc"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ntopc"]
+gradient = SubResource("Gradient_vanlc")
 
 [node name="SettingScreen" type="Node2D"]
 script = ExtResource("1_jo40o")
@@ -73,5 +79,12 @@ offset_right = 1080.0
 offset_bottom = 180.0
 bbcode_enabled = true
 text = "[center][font_size=160]Comic-Tutorial[/font_size][/center]"
+
+[node name="BLACK_PANEL" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1080, 400)
+offset_top = 2000.0
+offset_right = 1080.0
+offset_bottom = 2300.0
+texture = SubResource("GradientTexture1D_ntopc")
 
 [connection signal="input_event" from="BackButtonTexture/Area2D" to="." method="_on_area_2d_input_event"]
